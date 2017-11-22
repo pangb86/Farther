@@ -5,7 +5,6 @@ import SessionFormContainer from './session_form/session_form_container';
 
 const App = () => (
   <div>
-    <h1>Farther</h1>
     <NavbarContainer />
 
     <Route path="/login" component={SessionFormContainer} />
