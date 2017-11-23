@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 const sessionButtons = () => (
   <div className="nav-login-signup">
-
       <Link to="/" className="nav-login-header">
         <h1>
           Farther
@@ -31,10 +30,21 @@ const sessionButtons = () => (
 );
 
 const userGreeting = (currentUser, logout) => (
-	<div className="nav-greeting">
-    <h1>Farther</h1>
-    <h2 className="nav-username">{currentUser.username}</h2>
-    <button className="nav-logout" onClick={logout}>Log Out</button>
+	<div className="nav-login-signup">
+    <Link to="/" className="nav-login-header">
+      <h1>
+        Farther
+      </h1>
+    </Link>
+    <div className="nav-buttons">
+      <h2 className="nav-username">{currentUser.username}</h2>
+      <button className="nav-logout-button" onClick={logout}>
+        <span className="nav-logout-icon"></span>
+        <div>
+          LOG OUT
+        </div>
+      </button>
+    </div>
 	</div>
 );
 

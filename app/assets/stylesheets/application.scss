@@ -13,7 +13,9 @@
  *= require_self
  */
 
+// Reset CSS file
 @import "base/reset.scss";
-
+// Navbar CSS file
 @import "components/navbar.scss";
+// Session Form CSS file
 @import "components/session_form.scss";

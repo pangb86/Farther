@@ -60,6 +60,26 @@
   margin-right: 6px;
 }
 
+.nav-logout-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-image: image-url("/assets/logout.png");
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  margin-right: 7px;
+  margin-top: 2px;
+}
+
 .nav-button-link {
   text-decoration: none;
+}
+
+.nav-username {
+  display: flex;
+  align-items: center;
+  font-family: 'Muli', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
 }

@@ -13,8 +13,12 @@ import SessionFormContainer from './session_form/session_form_container';
 const App = () => (
   <div className="outer-main-div">
     <NavbarContainer />
-    <AuthRoute path="/login" component={SessionFormContainer} />
-    <AuthRoute path="/signup" component={SessionFormContainer} />
+    <Switch>
+      <AuthRoute path="/splash"/>
+      <AuthRoute path="/login" component={SessionFormContainer} />
+      <AuthRoute path="/signup" component={SessionFormContainer} />
+      <ProtectedRoute path="/"/>
+    </Switch>
   </div>
 );
 
