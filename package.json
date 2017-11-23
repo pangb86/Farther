@@ -36,5 +36,13 @@
   "bugs": {
     "url": "https://github.com/pangb86/Farther/issues"
   },
-  "homepage": "https://github.com/pangb86/Farther#readme"
+  "homepage": "https://github.com/pangb86/Farther#readme",
+
+  "engines": {
+    "node": "6.10.1",
+    "npm": "3.10.10"
+  },
+  "scripts": {
+    "postinstall": "webpack"
+  }
 }
