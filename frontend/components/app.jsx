@@ -4,12 +4,10 @@ import NavbarContainer from './navbar/navbar_container';
 import SessionFormContainer from './session_form/session_form_container';
 
 const App = () => (
-  <div>
+  <div className="outer-main-div">
     <NavbarContainer />
-
     <Route path="/login" component={SessionFormContainer} />
     <Route path="/signup" component={SessionFormContainer} />
-    
   </div>
 );
 
