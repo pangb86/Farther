@@ -3,7 +3,12 @@ import { Link } from 'react-router-dom';
 
 const sessionButtons = () => (
   <div className="nav-login-signup">
-    <h1 className="nav-login-header">Farther</h1>
+
+      <Link to="/" className="nav-login-header">
+        <h1>
+          Farther
+        </h1>
+      </Link>
     <div className="nav-buttons">
       <Link className="nav-button-link" to="/signup">
         <button className="nav-signup">

@@ -72,7 +72,9 @@ class SessionForm extends React.Component {
             <div className="login-prompt">
               {this.props.formType === "signup" ? "Sign Up" : "Log In"}
             </div>
+            <br/>
             {this.renderErrors()}
+            <br/>
             <div className="login-form">
               <label>
                 <input type="text"
@@ -95,9 +97,16 @@ class SessionForm extends React.Component {
                 />
               </label>
               <br/>
+              <br/>
               <input type="submit"
-                value={this.props.formType === "signup" ? "SIGNUP" : "LOGIN"}/>
-              <button onClick={this.demoLogin}>DEMO LOGIN</button>
+                value={this.props.formType === "signup" ? "Sign Up" : "Log In"}
+                className="login-button"
+              />
+              <br/>
+              <br/>
+              <button className="login-button" onClick={this.demoLogin}>
+                Demo Login
+              </button>
             </div>
           </form>
         </div>
