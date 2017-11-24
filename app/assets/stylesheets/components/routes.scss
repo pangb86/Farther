@@ -1,4 +1,16 @@
+html, body, #root, .outer-main-div {
+  height: 96.82%;
+}
+
+.routes-map-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .routes-map {
-  width: 500px;
-  height: 500px;
+  width: 1000px;
+  height: 600px;
 }
