@@ -84,7 +84,7 @@ class RoutesForm extends React.Component {
           marker.setMap(null);
           // removes marker from the markers array
           const markerIdx = this.state.markers.indexOf(marker);
-          console.log(markerIdx);
+          cons
           if (markerIdx > -1) {
             this.state.markers.splice(markerIdx, 1);
           }
@@ -104,16 +104,21 @@ class RoutesForm extends React.Component {
   }
 
   createRouteRequest() {
+    // creates routeRequest object with starting point being the first
+    // marker location and the destination being the second marker location
     const routeRequest = {
       origin: this.state.markers[0].getPosition(),
       destination: this.state.markers[1].getPosition(),
       travelMode: "BICYCLING",
     };
+    // calls Google Maps API for directions and if the status is OK
+    // it will render the route on the map
     directionsService.route(routeRequest, (directions, status) => {
       if (status === 'OK') {
         directionsDisplay.setDirections(directions);
       }
     });
+    // clears the markers from the map and the markers array
     this.state.markers[0].setMap(null);
     this.state.markers[1].setMap(null);
     this.state.markers = [];
@@ -143,13 +148,16 @@ class RoutesForm extends React.Component {
         <br/>
         <br/>
         <div className="routes-form-container">
-          <input type="text"
-            value={this.state.title}
-            onChange={this.update('title')}
-            className="route-title-input"
-            placeholder="Title"
-          />
-        <button className="routes-create-button">
+          <div className="routes-title-help">
+            <input type="text"
+              value={this.state.title}
+              onChange={this.update('title')}
+              className="route-title-input"
+              placeholder="Title"
+            />
+            <span className="routes-help-icon"></span>
+          </div>
+          <button className="routes-create-button">
             Create Route
           </button>
           <button className="routes-bikelayer-button"
