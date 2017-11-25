@@ -5,22 +5,35 @@ import MarkerManager from '../../util/marker_manager';
 
 // initial map options
 const mapOptions = {
+// San Francisco coords
   center: {
     lat: 39.9612,
     lng: -82.9988
-  }, // San Francisco coords
+  },
   zoom: 12
 };
 
-class Routes extends React.Component {
+// create a Google Maps bicycling layer
+const bikeLayer = new google.maps.BicyclingLayer();
+// create a Google Maps directions service object
+const directionsService = new google.maps.DirectionsService();
+// create a Google Maps directions rendering object
+const directionsDisplay = new google.maps.DirectionsRenderer();
+
+class RoutesForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       // array of lat/lng pairs in JSON
       markerCoords: [],
       // array of Google Maps Marker objects
-      markers: []
+      markers: [],
+      // boolean indicating if the bike layer is displayed
+      layerOn: false,
+      // route title
+      title: ""
     };
+    this.toggleBikeLayer = this.toggleBikeLayer.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +42,8 @@ class Routes extends React.Component {
     // create a new Google map attached to JSX map container
     // using the defined map options above
     this.route_map = new google.maps.Map(mapElement, mapOptions);
+    // applies directionsDisplay object to the Google map
+    directionsDisplay.setMap(this.route_map);
     // center map on user location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -50,7 +65,7 @@ class Routes extends React.Component {
     google.maps.event.addListener(this.route_map, 'click', (event) => {
       placeMarker(event.latLng);
     });
-
+    // place marker callback
     const placeMarker = (location) => {
       // constrains total number of markers to 2
       if (this.state.markers.length < 2) {
@@ -82,7 +97,41 @@ class Routes extends React.Component {
         // add JSON of the lat/lng of the marker to markerCoords array
         this.state.markerCoords.push(googleLatLngObj.toJSON());
       }
+      if (this.state.markers.length === 2) {
+        this.createRouteRequest();
+      }
     };
+  }
+
+  createRouteRequest() {
+    const routeRequest = {
+      origin: this.state.markers[0].getPosition(),
+      destination: this.state.markers[1].getPosition(),
+      travelMode: "BICYCLING",
+    };
+    directionsService.route(routeRequest, (directions, status) => {
+      if (status === 'OK') {
+        directionsDisplay.setDirections(directions);
+      }
+    });
+    this.state.markers[0].setMap(null);
+    this.state.markers[1].setMap(null);
+    this.state.markers = [];
+  }
+
+  toggleBikeLayer() {
+    // toggles bicycling layer based on layerOn boolean
+    if (this.state.layerOn) {
+      bikeLayer.setMap(null);
+      this.setState({layerOn: false});
+    } else {
+      bikeLayer.setMap(this.route_map);
+      this.setState({layerOn: true});
+    }
+  }
+
+  update(field) {
+    return e => this.setState({[field]: e.currentTarget.value});
   }
 
   render() {
@@ -95,14 +144,23 @@ class Routes extends React.Component {
         <br/>
         <div className="routes-form-container">
           <input type="text"
+            value={this.state.title}
+            onChange={this.update('title')}
             className="route-title-input"
             placeholder="Title"
           />
-          <button className="routes-reset-button">Create Route</button>
+        <button className="routes-create-button">
+            Create Route
+          </button>
+          <button className="routes-bikelayer-button"
+            onClick={this.toggleBikeLayer}
+          >
+            Bicycling Layer
+          </button>
         </div>
       </div>
     );
   }
 }
 
-export default Routes;
+export default RoutesForm;

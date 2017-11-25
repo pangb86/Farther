@@ -17,17 +17,13 @@ html, body, #root, .outer-main-div {
   height: 100%;
 }
 
-.routes-reset-button {
-  font-family: 'Muli', sans-serif;
-  font-size: 15px;
-  color: white;
-  background-color: #fc4c02;
-  border-radius: 3px;
-  border: none;
-  width: 300px;
-  height: 43px;
-  cursor: pointer;
-  margin: 0;
+.routes-form-container {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
 }
 
 .route-title-input {
@@ -41,13 +37,31 @@ html, body, #root, .outer-main-div {
   width: 291px;
   height: 40px;
   padding-left: 8px;
+  margin: 0px 0px 0px 100px;
 }
 
-.routes-form-container {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  align-items: center;
+.routes-create-button {
+  font-family: 'Muli', sans-serif;
+  font-size: 15px;
+  color: white;
+  background-color: #fc4c02;
+  border-radius: 3px;
+  border: none;
+  width: 300px;
+  height: 43px;
+  cursor: pointer;
+  margin: 0px 109px 0px 0px;
+}
+
+.routes-bikelayer-button {
+  font-family: 'Muli', sans-serif;
+  font-size: 15px;
+  color: white;
+  background-color: #fc4c02;
+  border-radius: 3px;
+  border: none;
+  width: 150px;
+  height: 43px;
+  cursor: pointer;
+  margin: 0px 110px 0px 30px;
 }
