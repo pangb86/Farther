@@ -27,6 +27,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  margin-right: 37px
 }
 
 .route-title-input {
@@ -40,7 +41,7 @@
   width: 291px;
   height: 40px;
   padding-left: 8px;
-  margin: 0px 0px 0px 100px;
+  margin: 0px 0px 0px 80px;
 }
 
 .routes-help-icon {
@@ -96,6 +97,13 @@
   transition: 550ms all;
 }
 
+.routes-create-dist{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
 .routes-create-button {
   font-family: 'Muli', sans-serif;
   font-size: 15px;
@@ -106,7 +114,7 @@
   width: 300px;
   height: 43px;
   cursor: pointer;
-  margin: 0px 109px 0px 0px;
+  margin: 0px 0px 0px 160px;
   opacity: 1.0;
   transition: opacity 0.7s ease-in-out;
 }
@@ -115,6 +123,28 @@
   background-color: gray;
   cursor: auto;
   opacity: 0.4;
+}
+
+.routes-distance {
+  display: block;
+  width: 100px;
+  height: 30px;
+  font-family: 'Muli', sans-serif;
+  font-size: 22px;
+  color: black;
+  margin-top: 5px;
+  margin-left: 90px;
+}
+
+.routes-elevation {
+  display: block;
+  width: 100px;
+  height: 30px;
+  font-family: 'Muli', sans-serif;
+  font-size: 22px;
+  color: black;
+  margin-top: 5px;
+  margin-left: 100px;
 }
 
 .routes-bikelayer-button {
@@ -127,5 +157,5 @@
   width: 150px;
   height: 43px;
   cursor: pointer;
-  margin: 0px 110px 0px 30px;
+  margin: 0px 90px 0px 0px;
 }

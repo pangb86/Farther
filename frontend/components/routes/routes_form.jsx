@@ -5,7 +5,7 @@ import MarkerManager from '../../util/marker_manager';
 
 // initial map options
 const mapOptions = {
-// San Francisco coords
+// San Francisco coordinates
   center: {
     lat: 39.9612,
     lng: -82.9988
@@ -21,6 +21,8 @@ const directionsService = new google.maps.DirectionsService();
 const directionsDisplay = new google.maps.DirectionsRenderer({
     suppressBicyclingLayer: true
   });
+// create a Google Maps elevation service object
+const elevationService = new google.maps.ElevationService;
 
 class RoutesForm extends React.Component {
   constructor(props){
@@ -34,12 +36,19 @@ class RoutesForm extends React.Component {
       title: "",
       // distance of the route in miles
       distance: null,
+      // distance of the route in a string
+      distString: "",
+      // elevation gain of the route
+      elevation: null,
+      // elevation gain in a string
+      eleString: "",
       // polyline string needed to re-render the route on a Google map
       polyline: "",
       //boolean indicating if the create button is disabled
-      createDisabled: true
+      createDisabled: true,
     };
     this.toggleBikeLayer = this.toggleBikeLayer.bind(this);
+    this.getElevationChange = this.getElevationChange.bind(this);
   }
 
   componentDidMount() {
@@ -117,22 +126,54 @@ class RoutesForm extends React.Component {
         directionsDisplay.setDirections(directions);
         // enables the create route button
         this.setState({createDisabled: false});
+        // stores the polyline string of the route in the local state
+        this.setState({polyline: directions.routes[0].overview_polyline});
+        // coverts the route distance to miles
+        const distLong = directions.routes[0].legs[0].distance.value / 1609.34;
+        // rounds route distance to one decimal place
+        const dist = Math.round(distLong * 10) / 10;
+        // sets distance in the local state
+        this.setState({distance: dist});
+        // sets the distance string in the local state
+        this.setState({distString: directions.routes[0].legs[0].distance.text});
+        // store the route's path of LatLng objects as an array
+        const pathArr = directions.routes[0].overview_path;
+        // call Google Maps elevation service withe the path array
+        // and calls getElevationChange passing it the response
+        elevationService.getElevationAlongPath({
+          'path': pathArr,
+          'samples': 256
+        }, this.getElevationChange);
+        // clears the markers from the map and the markers array
+        this.state.markers[0].setMap(null);
+        this.state.markers[1].setMap(null);
+        this.setState({markers: []});
       }
-      // coverts the route distance to miles
-      const distLong = directions.routes[0].legs[0].distance.value / 1609.34;
-      // rounds route distance to one decimal place
-      const dist = Math.round(distLong * 10) / 10;
-      // sets distance in the local state
-      this.setState({distance: dist});
-      console.log(directions);
-      console.log(directions.routes[0].overview_polyline);
-      console.log(directions.routes[0].legs[0].distance.text);
-      console.log(this.state.distance);
     });
-    // clears the markers from the map and the markers array
-    this.state.markers[0].setMap(null);
-    this.state.markers[1].setMap(null);
-    this.setState({markers: []});
+
+  }
+
+  // calculates the total elevation gain over a path
+  getElevationChange(elevations, status) {
+    // checks if the status is OK
+    if (status === "OK") {
+      let totalElevation = 0;
+      // loop over elevations array returned by Google Maps service
+      for (var i = 1; i < elevations.length; i++) {
+        // checks for increase in elevation and adds it to the total
+        if (elevations[i].elevation > elevations[i - 1].elevation) {
+          let change = elevations[i].elevation - elevations[i -1].elevation;
+          totalElevation += change;
+        }
+      }
+      // convert total elevation to feet and round it to the nearest foot
+      totalElevation = Math.round(totalElevation * 3.28084);
+      // sets the elevation of the local state
+      this.setState({elevation: totalElevation});
+      // sets the elevation string of the local state
+      this.setState({eleString: `${totalElevation} ft`});
+      console.log(this.state.eleString);
+    }
   }
 
   toggleBikeLayer() {
@@ -175,13 +216,16 @@ class RoutesForm extends React.Component {
                 Click two more points to create a new route.
               </span>
             </div>
-
           </div>
-          <button className="routes-create-button"
-            disabled={this.state.createDisabled}
-          >
-            Create Route
-          </button>
+          <div className="routes-create-dist">
+            <button className="routes-create-button"
+              disabled={this.state.createDisabled}
+            >
+              Create Route
+            </button>
+            <div className="routes-distance">{this.state.distString}</div>
+            <div className="routes-elevation">{this.state.eleString}</div>
+          </div>
           <button className="routes-bikelayer-button"
             onClick={this.toggleBikeLayer}
           >
