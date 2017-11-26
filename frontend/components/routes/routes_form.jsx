@@ -57,8 +57,9 @@ class RoutesForm extends React.Component {
     // create a new Google map attached to JSX map container
     // using the defined map options above
     this.route_map = new google.maps.Map(mapElement, mapOptions);
-    // applies directionsDisplay object to the Google map
-    directionsDisplay.setMap(this.route_map);
+    // clears the direction display object from the route map
+    // prevents old routes from being shown upon revisit
+    directionsDisplay.setMap(null);
     // center map on user location
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -68,6 +69,7 @@ class RoutesForm extends React.Component {
         });
       });
     } else {
+      // TODO: Maybe turn this into an error message or remove entirely
       console.log("Geolocation is not supported by this browser.");
     }
     // add event listener to the Google map
@@ -123,6 +125,9 @@ class RoutesForm extends React.Component {
     directionsService.route(routeRequest, (directions, status) => {
       // if the status is OK, it will render the route on the map
       if (status === 'OK') {
+        // sets the direction display object to the route map
+        // and renders it
+        directionsDisplay.setMap(this.route_map);
         directionsDisplay.setDirections(directions);
         // enables the create route button
         this.setState({createDisabled: false});
@@ -154,6 +159,7 @@ class RoutesForm extends React.Component {
   }
 
   // calculates the total elevation gain over a path
+  // TODO: Plot the elevation profile
   getElevationChange(elevations, status) {
     // checks if the status is OK
     if (status === "OK") {
@@ -172,7 +178,6 @@ class RoutesForm extends React.Component {
       this.setState({elevation: totalElevation});
       // sets the elevation string of the local state
       this.setState({eleString: `${totalElevation} ft`});
-      console.log(this.state.eleString);
     }
   }
 
@@ -190,6 +195,8 @@ class RoutesForm extends React.Component {
   update(field) {
     return e => this.setState({[field]: e.currentTarget.value});
   }
+
+  // TODO: handle errors
 
   render() {
     return (
