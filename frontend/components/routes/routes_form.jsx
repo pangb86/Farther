@@ -26,14 +26,18 @@ class RoutesForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      // array of lat/lng pairs in JSON
-      markerCoords: [],
       // array of Google Maps Marker objects
       markers: [],
       // boolean indicating if the bike layer is displayed
       layerOn: false,
       // route title
-      title: ""
+      title: "",
+      // distance of the route in miles
+      distance: null,
+      // polyline string needed to re-render the route on a Google map
+      polyline: "",
+      //boolean indicating if the create button is disabled
+      createDisabled: true
     };
     this.toggleBikeLayer = this.toggleBikeLayer.bind(this);
   }
@@ -80,7 +84,7 @@ class RoutesForm extends React.Component {
         // add marker to the markers array
         this.state.markers.push(marker);
         // add event listener to every marker that removes it
-        // upon right clicking on it
+        // upon clicking on it
         google.maps.event.addListener(marker, 'click', () => {
           // removes marker from the map
           marker.setMap(null);
@@ -90,12 +94,6 @@ class RoutesForm extends React.Component {
             this.state.markers.splice(markerIdx, 1);
           }
         });
-        // obain the position of the marker in a Google LatLng object
-        const googleLatLngObj = marker.getPosition();
-        // convert Google LatLng object to JSON:
-        // {lat: <lat_float>, lng: <lng_float>}
-        // add JSON of the lat/lng of the marker to markerCoords array
-        this.state.markerCoords.push(googleLatLngObj.toJSON());
       }
       // if there are two markers make a directions request
       if (this.state.markers.length === 2) {
@@ -105,25 +103,36 @@ class RoutesForm extends React.Component {
   }
 
   createRouteRequest() {
-    // creates routeRequest object with starting point being the first
+    // creates routeRequest object with the starting point being the first
     // marker location and the destination being the second marker location
     const routeRequest = {
       origin: this.state.markers[0].getPosition(),
       destination: this.state.markers[1].getPosition(),
-      // travelMode: "DRIVING",
       travelMode: "BICYCLING",
     };
-    // calls Google Maps API for directions and if the status is OK
-    // it will render the route on the map
+    // calls Google Maps API for directions
     directionsService.route(routeRequest, (directions, status) => {
+      // if the status is OK, it will render the route on the map
       if (status === 'OK') {
         directionsDisplay.setDirections(directions);
+        // enables the create route button
+        this.setState({createDisabled: false});
       }
+      // coverts the route distance to miles
+      const distLong = directions.routes[0].legs[0].distance.value / 1609.34;
+      // rounds route distance to one decimal place
+      const dist = Math.round(distLong * 10) / 10;
+      // sets distance in the local state
+      this.setState({distance: dist});
+      console.log(directions);
+      console.log(directions.routes[0].overview_polyline);
+      console.log(directions.routes[0].legs[0].distance.text);
+      console.log(this.state.distance);
     });
     // clears the markers from the map and the markers array
     this.state.markers[0].setMap(null);
     this.state.markers[1].setMap(null);
-    this.state.markers = [];
+    this.setState({markers: []});
   }
 
   toggleBikeLayer() {
@@ -168,7 +177,9 @@ class RoutesForm extends React.Component {
             </div>
 
           </div>
-          <button className="routes-create-button">
+          <button className="routes-create-button"
+            disabled={this.state.createDisabled}
+          >
             Create Route
           </button>
           <button className="routes-bikelayer-button"
