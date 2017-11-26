@@ -18,7 +18,9 @@ const bikeLayer = new google.maps.BicyclingLayer();
 // create a Google Maps directions service object
 const directionsService = new google.maps.DirectionsService();
 // create a Google Maps directions rendering object
-const directionsDisplay = new google.maps.DirectionsRenderer();
+const directionsDisplay = new google.maps.DirectionsRenderer({
+    suppressBicyclingLayer: true
+  });
 
 class RoutesForm extends React.Component {
   constructor(props){
@@ -79,16 +81,14 @@ class RoutesForm extends React.Component {
         this.state.markers.push(marker);
         // add event listener to every marker that removes it
         // upon right clicking on it
-        google.maps.event.addListener(marker, 'rightclick', () => {
+        google.maps.event.addListener(marker, 'click', () => {
           // removes marker from the map
           marker.setMap(null);
           // removes marker from the markers array
           const markerIdx = this.state.markers.indexOf(marker);
-          cons
           if (markerIdx > -1) {
             this.state.markers.splice(markerIdx, 1);
           }
-          console.log(this.state.markers)
         });
         // obain the position of the marker in a Google LatLng object
         const googleLatLngObj = marker.getPosition();
@@ -97,6 +97,7 @@ class RoutesForm extends React.Component {
         // add JSON of the lat/lng of the marker to markerCoords array
         this.state.markerCoords.push(googleLatLngObj.toJSON());
       }
+      // if there are two markers make a directions request
       if (this.state.markers.length === 2) {
         this.createRouteRequest();
       }
@@ -109,6 +110,7 @@ class RoutesForm extends React.Component {
     const routeRequest = {
       origin: this.state.markers[0].getPosition(),
       destination: this.state.markers[1].getPosition(),
+      // travelMode: "DRIVING",
       travelMode: "BICYCLING",
     };
     // calls Google Maps API for directions and if the status is OK
@@ -155,7 +157,16 @@ class RoutesForm extends React.Component {
               className="route-title-input"
               placeholder="Title"
             />
-            <span className="routes-help-icon"></span>
+            <div className="routes-help-icon">
+              <span className="routes-tooltip">
+                Click two points on the map to create a route.
+                <br/>
+                Click on a marker to remove it.
+                <br/>
+                Click two more points to create a new route.
+              </span>
+            </div>
+
           </div>
           <button className="routes-create-button">
             Create Route

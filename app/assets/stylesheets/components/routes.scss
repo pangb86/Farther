@@ -47,15 +47,16 @@
   display: block;
   width: 30px;
   height: 30px;
+  position: relative;
   background-image: image-url("/assets/help.png");
   background-size: 30px 30px;
   background-repeat: no-repeat;
-  margin-left: 15px;
+  margin-left: 8px;
   //fade-in-effect
   opacity: 0.25;
-  transition: opacity 1s ease-in-out;
-  -moz-transition: opacity 1s ease-in-out;
-  -webkit-transition: opacity 1s ease-in-out;
+  transition: opacity .55s ease-in-out;
+  -moz-transition: opacity .55s ease-in-out;
+  -webkit-transition: opacity .55s ease-in-out;
 }
 
 .routes-help-icon:hover {
@@ -63,6 +64,36 @@
     transition: opacity .55s ease-in-out;
     -moz-transition: opacity .55s ease-in-out;
     -webkit-transition: opacity .55s ease-in-out;
+}
+
+.routes-help-icon:hover .routes-tooltip {
+  visibility: visible;
+  transition: 550ms all;
+}
+
+.routes-tooltip {
+  visibility: hidden;
+  opacity: 1.0;
+  width: 350px;
+  font-family: 'Muli', sans-serif;
+  font-size: 15px;
+  color: white;
+  text-align: center;
+  background: rgba(0,0,0,0.9);
+  border: none;
+  padding: 5px 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 175%;
+  left: 25%;
+  margin-left: -175px;
+  transition: 550ms all;
+}
+
+.routes-tooltip:hover {
+  opacity: 0.0;
+  transition: 550ms all;
 }
 
 .routes-create-button {
