@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router-dom';
+// import errorsImg from '../../../app/assets/images/errors.png';
 
 // initial map options
 const mapOptions = {
@@ -266,6 +267,9 @@ class RoutesForm extends React.Component {
             <div className="routes-errors-icon"
               style={{visibility: this.state.showErrors ? 'visible' : 'hidden' }}
             >
+              <img src="https://i.imgur.com/cd4XFYD.png"
+                className="routes-errors-image"
+              />
               <div className="routes-errors-box">
                 {this.renderErrors()}
               </div>

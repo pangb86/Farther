@@ -70,15 +70,18 @@
 
 .routes-errors-icon {
   display: block;
+  position: relative;
+  // background-image: image-url("/assets/errors.png");
+  // background-size: 30px 30px;
+  // background-repeat: no-repeat;
+  margin-left: 8px;
+}
+
+.routes-errors-image {
+  margin-top: 3px;
   width: 30px;
   height: 30px;
-  position: relative;
-  background-image: image-url("/assets/errors.png");
-  background-size: 30px 30px;
-  background-repeat: no-repeat;
-  margin-left: 8px;
   animation: pulse 2s infinite;
-  border-radius: 50%
 }
 
 @keyframes pulse {
@@ -94,8 +97,10 @@
 }
 
 .routes-errors-icon:hover .routes-errors-box {
-  visibility: visible;
-  transition: 0s all;
+  opacity: .9;
+  transition: opacity .55s ease-in-out;
+  -moz-transition: opacity .55s ease-in-out;
+  -webkit-transition: opacity .55s ease-in-out;
 }
 
 .routes-help-icon:hover .routes-tooltip {
@@ -104,8 +109,6 @@
 }
 
 .routes-errors-box {
-  visibility: hidden;
-  opacity: 1.0;
   width: 350px;
   font-family: 'Muli', sans-serif;
   font-size: 15px;
@@ -114,26 +117,21 @@
   background: rgba(0,0,0,0.6);
   border: none;
   padding: 5px 0;
-  /* Position the tooltip */
+  // Position the tooltip
   position: absolute;
   z-index: 1;
   bottom: 175%;
   left: 25%;
   margin-left: -175px;
-  transition: 0s all;
-  animation: none;
+  // fade-in effect
+  opacity: 0;
+  transition: opacity .55s ease-in-out;
+  -moz-transition: opacity .55s ease-in-out;
+  -webkit-transition: opacity .55s ease-in-out;
 }
 
-.routes-errors-icon > div {
-  animation: none;
-  animation-name: none;
-  opacity: 1.0;
-}
-
-.routes-errors-box ul li {
-  animation: none;
-  animation-name: none;
-  opacity: 1.0;
+.routes-errors-box:hover {
+  opacity: 0.0;
 }
 
 .routes-tooltip {
@@ -144,7 +142,7 @@
   font-size: 15px;
   color: white;
   text-align: center;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,.9);
   border: none;
   padding: 5px 0;
   /* Position the tooltip */
