@@ -133,6 +133,7 @@ class RoutesForm extends React.Component {
         this.setState({createDisabled: false});
         // stores the polyline string of the route in the local state
         this.setState({polyline: directions.routes[0].overview_polyline});
+        console.log(this.state.polyline);
         // coverts the route distance to miles
         const distLong = directions.routes[0].legs[0].distance.value / 1609.34;
         // rounds route distance to one decimal place

@@ -4,14 +4,9 @@ import configureStore from './store/store';
 import Root from './components/root';
 
 // test functions
-import * as SessionAPIUtil from './util/session_api_util';
-import { signup, login, logout } from './actions/session_actions';
+
 
 document.addEventListener('DOMContentLoaded', () => {
-  // test functions
-  window.login = login;
-  window.signup = signup;
-  window.logout = logout;
 
   let store;
   if (window.currentUser) {
