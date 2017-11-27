@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20171126212745) do
 
   create_table "routes", force: :cascade do |t|
     t.string "title", null: false
-    t.string "polyline", null: false
+    t.text "polyline", null: false
     t.float "distance", null: false
     t.integer "elevation", null: false
     t.integer "user_id", null: false

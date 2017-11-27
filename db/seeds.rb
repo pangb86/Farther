@@ -8,3 +8,4 @@
 
 User.create(username: "Demo_User", email: "demo@email.com", password: "password")
 User.create(username: "Raymart", email: "raymart@email.com", password: "password")
+User.create(username: "Bo", email:"bo@email.com", password: "password")

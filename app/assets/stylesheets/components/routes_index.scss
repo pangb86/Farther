@@ -1,15 +1,25 @@
 .routes-index-box {
+  display: block;
+  // flex-direction: column;
+  // justify-content: space-around;
+  // align-items: flex-start;
+  width: 100%;
+  border: 1px solid gray;
+}
+
+.route-index-intro {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
 
 .routes-index-header {
   font-family: 'Muli', sans-serif;
-  font-size: 30px;
-  font-weight: 600;
+  font-size: 25px;
+  font-weight: 400;
   color: black;
+  margin: 28px 50px 10px 50px;
 }
 
 .routes-index-create-button {
@@ -19,18 +29,45 @@
   background-color: #fc4c02;
   border-radius: 3px;
   border: none;
-  width: 300px;
+  width: 200px;
   height: 43px;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 .routes-create-link {
   text-decoration: none;
 }
 
+// UL containing each route LI
+.routes-index-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.route-item-box {
+  border: 1px solid gray;
+}
+
 .route-item-title {
   font-family: 'Muli', sans-serif;
-  font-size: 20px;
+  font-size: 22px;
+  font-weight: 600;
+  color: black;
+}
+
+.route-item-date {
+  font-family: 'Muli', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: black;
+}
+
+.route-item-distance, .route-item-elevation {
+  font-family: 'Muli', sans-serif;
+  font-size: 18px;
   font-weight: 600;
   color: black;
 }

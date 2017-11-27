@@ -239,7 +239,6 @@ class RoutesForm extends React.Component {
   }
 
   render() {
-    console.log(this.state.showErrors);
     return (
       <div className="routes-map-box">
         <div className="routes-map" ref="map">
