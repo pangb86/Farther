@@ -15,7 +15,7 @@ class RouteIndexItem extends React.Component {
     console.log(this.props);
     return (
       <div className="route-item-box">
-        {this.props.route.title}
+        <h1 className="route-item-title">{this.props.route.title}</h1>
       </div>
     );
   }

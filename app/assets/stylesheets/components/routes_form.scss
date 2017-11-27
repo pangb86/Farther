@@ -109,7 +109,7 @@
 }
 
 .routes-errors-box {
-  width: 350px;
+  width: 250px;
   font-family: 'Muli', sans-serif;
   font-size: 15px;
   color: white;
@@ -120,9 +120,9 @@
   // Position the tooltip
   position: absolute;
   z-index: 1;
-  bottom: 175%;
+  bottom: 155%;
   left: 25%;
-  margin-left: -175px;
+  margin-left: -125px;
   // fade-in effect
   opacity: 0;
   transition: opacity .55s ease-in-out;
