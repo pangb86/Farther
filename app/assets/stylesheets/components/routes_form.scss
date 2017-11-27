@@ -95,6 +95,7 @@
 
 .routes-errors-icon:hover .routes-errors-box {
   visibility: visible;
+  transition: 0s all;
 }
 
 .routes-help-icon:hover .routes-tooltip {
@@ -119,7 +120,20 @@
   bottom: 175%;
   left: 25%;
   margin-left: -175px;
-  transition: 550ms all;
+  transition: 0s all;
+  animation: none;
+}
+
+.routes-errors-icon > div {
+  animation: none;
+  animation-name: none;
+  opacity: 1.0;
+}
+
+.routes-errors-box ul li {
+  animation: none;
+  animation-name: none;
+  opacity: 1.0;
 }
 
 .routes-tooltip {
@@ -164,7 +178,7 @@
   width: 300px;
   height: 43px;
   cursor: pointer;
-  margin: 0px 0px 0px 160px;
+  margin: 0px 0px 0px 144px;
   opacity: 1.0;
   transition: opacity 0.7s ease-in-out;
 }
@@ -183,7 +197,7 @@
   font-size: 22px;
   color: black;
   margin-top: 5px;
-  margin-left: 90px;
+  margin-left: 85px;
 }
 
 .routes-elevation {

@@ -266,9 +266,9 @@ class RoutesForm extends React.Component {
             <div className="routes-errors-icon"
               style={{visibility: this.state.showErrors ? 'visible' : 'hidden' }}
             >
-              <span className="routes-errors-box">
+              <div className="routes-errors-box">
                 {this.renderErrors()}
-              </span>
+              </div>
             </div>
           </div>
           <div className="routes-create-dist">

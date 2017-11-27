@@ -31,11 +31,19 @@ const sessionButtons = () => (
 
 const userGreeting = (currentUser, logout) => (
 	<div className="nav-login-signup">
-    <Link to="/" className="nav-login-header">
-      <h1>
-        Farther
-      </h1>
-    </Link>
+    <div className="nav-header-links">
+      <Link to="/" className="nav-login-header">
+        <h1>
+          Farther
+        </h1>
+      </Link>
+      <Link to="/workouts" className="nav-workouts-link">
+        Rides
+      </Link>
+      <Link to="/routes" className="nav-routes-link">
+        Routes
+      </Link>
+    </div>
     <div className="nav-buttons">
       <h2 className="nav-username">{currentUser.username}</h2>
       <button className="nav-logout-button" onClick={logout}>

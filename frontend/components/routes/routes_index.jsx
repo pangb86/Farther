@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router-dom';
+import RouteIndexItem from './route_index_item';
 
 // props:
 // this.props.routes: array of all the routes for a user
@@ -17,9 +18,16 @@ class RoutesIndex extends React.Component {
   }
 
   render() {
+    const routesArr = this.props.routes;
     return(
       <div className="routes-index-box">
-        Something for now.
+        <ul className="routes-index-list">
+          {
+            routesArr.map(route => (
+              <RouteIndexItem route={route} />
+            ))
+          }
+        </ul>
       </div>
     );
   }
