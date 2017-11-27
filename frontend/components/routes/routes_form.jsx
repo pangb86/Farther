@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router-dom';
-import MarkerManager from '../../util/marker_manager';
 
 // initial map options
 const mapOptions = {
@@ -12,7 +11,6 @@ const mapOptions = {
   },
   zoom: 12
 };
-
 // create a Google Maps bicycling layer
 const bikeLayer = new google.maps.BicyclingLayer();
 // create a Google Maps directions service object
@@ -24,6 +22,9 @@ const directionsDisplay = new google.maps.DirectionsRenderer({
 // create a Google Maps elevation service object
 const elevationService = new google.maps.ElevationService;
 
+// props:
+// this.props.errors: array of error messages or null
+// this.props.createRoute(route): create route on the back end
 class RoutesForm extends React.Component {
   constructor(props){
     super(props);
@@ -44,11 +45,14 @@ class RoutesForm extends React.Component {
       eleString: "",
       // polyline string needed to re-render the route on a Google map
       polyline: "",
-      //boolean indicating if the create button is disabled
+      // boolean indicating if the create button is disabled
       createDisabled: true,
+      // boolean indicating if the errors icon should be visible
+      showErrors: false
     };
     this.toggleBikeLayer = this.toggleBikeLayer.bind(this);
     this.getElevationChange = this.getElevationChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -125,6 +129,8 @@ class RoutesForm extends React.Component {
     directionsService.route(routeRequest, (directions, status) => {
       // if the status is OK, it will render the route on the map
       if (status === 'OK') {
+        // removes the visibility of the errors icon
+        this.setState({showErrors: false});
         // sets the direction display object to the route map
         // and renders it
         directionsDisplay.setMap(this.route_map);
@@ -197,9 +203,42 @@ class RoutesForm extends React.Component {
     return e => this.setState({[field]: e.currentTarget.value});
   }
 
-  // TODO: handle errors
+  handleSubmit(e) {
+    e.preventDefault();
+    const routes = {
+      title: this.state.title,
+      distance: this.state.distance,
+      elevation: this.state.elevation,
+      polyline: this.state.polyline
+    };
+    this.props.createRoute({ routes })
+    .then(() => this.props.history.push("/routes"));
+  }
+
+  // display route errors
+  renderErrors() {
+    if (this.props.errors.length > 0) {
+      return(
+        <ul className="routes-errors">
+          {this.props.errors.map((error, i) => (
+            <li key={`error-${i}`}>
+              {error}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+  }
+
+  // sets visibility of the errors icon
+  componentWillReceiveProps(newProps) {
+    if (newProps.errors.length > 0) {
+      this.setState({showErrors: true});
+    }
+  }
 
   render() {
+    console.log(this.state.showErrors);
     return (
       <div className="routes-map-box">
         <div className="routes-map" ref="map">
@@ -224,10 +263,18 @@ class RoutesForm extends React.Component {
                 Click two more points to create a new route.
               </span>
             </div>
+            <div className="routes-errors-icon"
+              style={{visibility: this.state.showErrors ? 'visible' : 'hidden' }}
+            >
+              <span className="routes-errors-box">
+                {this.renderErrors()}
+              </span>
+            </div>
           </div>
           <div className="routes-create-dist">
             <button className="routes-create-button"
               disabled={this.state.createDisabled}
+              onClick={this.handleSubmit}
             >
               Create Route
             </button>
