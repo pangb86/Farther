@@ -34,6 +34,7 @@ const elevationService = new google.maps.ElevationService;
 class RouteShow extends React.Component {
   constructor(props){
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -77,6 +78,16 @@ class RouteShow extends React.Component {
     polylineObj.setMap(this.route_map);
   }
 
+  handleSubmit(e) {
+    e.preventDefault();
+    const routeId = this.props.route.id;
+    console.log(routeId);
+    // calls deleteRoute on the current route
+    this.props.deleteRoute(routeId)
+    // redirect to routes index page
+    .then(() => this.props.history.push("/routes"));
+  }
+
   render() {
     if (this.props.route) {
       const route = this.props.route;
@@ -90,7 +101,9 @@ class RouteShow extends React.Component {
               <div className="routes-show-title">
                 {route.title}
               </div>
-              <button className="routes-show-delete-button">
+              <button className="routes-show-delete-button"
+                onClick={this.handleSubmit}
+              >
                 Delete Route
               </button>
             </div>
