@@ -23,19 +23,23 @@ class RoutesIndex extends React.Component {
       <div className="routes-index-box">
         <div className="route-index-intro">
           <h1 className="routes-index-header">My Routes</h1>
-          <Link className="routes-create-link" to="/signup">
+          <Link className="routes-create-link" to="/routes/new">
             <button className="routes-index-create-button">
               Create New Route
             </button>
           </Link>
         </div>
-        <ul className="routes-index-list">
-          {
-            routesArr.map(route => (
-              <RouteIndexItem route={route} />
-            ))
-          }
-        </ul>
+
+        <div className="routes-index-list-box">
+          <ul className="routes-index-list">
+            {
+              routesArr.map(route => (
+                <RouteIndexItem route={route} />
+              ))
+            }
+          </ul>
+        </div>
+
       </div>
     );
   }

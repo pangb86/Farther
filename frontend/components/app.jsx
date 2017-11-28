@@ -7,12 +7,15 @@ import {
   HashRouter
 } from 'react-router-dom';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
+// React components
 import NavbarContainer from './navbar/navbar_container';
 import SessionFormContainer from './session_form/session_form_container';
 import Splash from './splash/splash';
 import Workouts from './workouts/workouts';
 import RoutesFormContainer from './routes/routes_form_container';
 import RoutesIndexContainer from './routes/routes_index_container';
+
+// <ProtectedRoute exact path="/routes/:routeId" component={RoutesShowContainer} />
 
 const App = () => (
   <div className="outer-main-div">
@@ -21,8 +24,9 @@ const App = () => (
       <AuthRoute path="/splash" component={Splash} />
       <AuthRoute path="/login" component={SessionFormContainer} />
       <AuthRoute path="/signup" component={SessionFormContainer} />
+      <ProtectedRoute path="/routes/new" component={RoutesFormContainer} />
       <ProtectedRoute path="/routes" component={RoutesIndexContainer} />
-      <ProtectedRoute path="/" component={RoutesFormContainer} />
+      <ProtectedRoute path="/" component={RoutesIndexContainer} />
     </Switch>
   </div>
 );

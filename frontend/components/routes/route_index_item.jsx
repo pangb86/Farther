@@ -18,14 +18,12 @@ class RouteIndexItem extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     // route object from passed down props
     const route = this.props.route;
     // HTML call to Google Static Maps API
     let mapPic = "https://maps.googleapis.com/maps/api/staticmap?style=feature:administrative%7Cvisibility:off&style=feature:road%7Cvisibility:simplified&style=feature:road.highway.controlled_access%7Cvisibility:off&scale=2&size=300x180&path=weight:2%7Ccolor:0xfc4c02%7Cenc:";
     // attach route's polyline and API key to the HTML request
     mapPic += route.polyline + "&key=AIzaSyDZ1dbiQu3SG8E0ljRYrI_B3VpuLeXIakE";
-    console.log(mapPic);
     return (
       <div className="route-item-box">
 

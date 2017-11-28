@@ -4,6 +4,7 @@
   // justify-content: space-around;
   // align-items: flex-start;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .route-index-intro {
@@ -11,6 +12,7 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  margin-left: 148px;
 }
 
 .routes-index-header {
@@ -36,6 +38,11 @@
 
 .routes-create-link {
   text-decoration: none;
+}
+
+.routes-index-list-box {
+  margin: 0 auto;
+  width: 77.4%;
 }
 
 // UL containing each route LI
