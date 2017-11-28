@@ -16,5 +16,8 @@ class Route < ApplicationRecord
   validates :title, :polyline, :distance, :elevation , presence: true
   validates :title, uniqueness: true
 
+  # Change so that one user can't have routes with the same title
+  # but different users can have a route with the same title  
+
   belongs_to :user
 end

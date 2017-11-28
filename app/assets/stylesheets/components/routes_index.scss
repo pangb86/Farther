@@ -4,7 +4,6 @@
   // justify-content: space-around;
   // align-items: flex-start;
   width: 100%;
-  border: 1px solid gray;
 }
 
 .route-index-intro {
@@ -16,7 +15,7 @@
 
 .routes-index-header {
   font-family: 'Muli', sans-serif;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 400;
   color: black;
   margin: 28px 50px 10px 50px;
@@ -44,30 +43,71 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+  flex-wrap: wrap;
   margin-top: 20px;
 }
 
 .route-item-box {
-  border: 1px solid gray;
+  margin: 10px;
+}
+
+.route-item-image {
+  width: 300px;
+  height: 180px;
+}
+
+.route-item-data {
+  background: #F7F7F7;
+  padding-left: 15px;
+  padding-top: 10px;
 }
 
 .route-item-title {
   font-family: 'Muli', sans-serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: black;
+  font-size: 20px;
+  font-weight: 400;
+  color: #5D7EB1;
+  text-decoration: none;
 }
 
-.route-item-date {
-  font-family: 'Muli', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: black;
+.route-item-title:hover {
+  text-decoration: underline;
+}
+
+.route-item-dist-elev {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.route-item-elevation-box {
+  margin-left: 24px;
 }
 
 .route-item-distance, .route-item-elevation {
   font-family: 'Muli', sans-serif;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
   color: black;
+}
+
+.route-item-distance-tag, .route-item-elvation-tag {
+  font-family: 'Muli', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #98989C;
+}
+
+.route-item-date {
+  font-family: 'Muli', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #98989C;
+}
+
+.route-item-date-box {
+  background: #F0F0F0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 15px;
 }
