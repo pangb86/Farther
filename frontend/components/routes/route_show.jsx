@@ -81,7 +81,6 @@ class RouteShow extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const routeId = this.props.route.id;
-    console.log(routeId);
     // calls deleteRoute on the current route
     this.props.deleteRoute(routeId)
     // redirect to routes index page
