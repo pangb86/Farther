@@ -29,12 +29,11 @@ class RoutesIndex extends React.Component {
             </button>
           </Link>
         </div>
-
         <div className="routes-index-list-box">
           <ul className="routes-index-list">
             {
               routesArr.map(route => (
-                <RouteIndexItem route={route} />
+                <RouteIndexItem key={route.id} route={route} />
               ))
             }
           </ul>

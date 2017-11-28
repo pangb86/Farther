@@ -26,19 +26,15 @@ class RouteIndexItem extends React.Component {
     mapPic += route.polyline + "&key=AIzaSyDZ1dbiQu3SG8E0ljRYrI_B3VpuLeXIakE";
     return (
       <div className="route-item-box">
-
         <Link to={`/routes/${route.id}`} className="route-item-title">
           <img src={mapPic} className="route-item-image" />
         </Link>
-
         <div className="route-item-data">
           <Link to={`/routes/${route.id}`} className="route-item-title">
             {route.title}
           </Link>
-
           <br/>
           <br/>
-
           <div className="route-item-dist-elev">
             <div className="route-item-distance-box">
               <div className="route-item-distance">
@@ -53,16 +49,13 @@ class RouteIndexItem extends React.Component {
               <div className="route-item-elvation-tag">Elevation</div>
             </div>
           </div>
-
           <br/>
          </div>
-
          <div className="route-item-date-box">
            <div className="route-item-date">
              {`Created on ${new Date(route.created_at).toLocaleDateString()}`}
            </div>
          </div>
-
       </div>
     );
   }

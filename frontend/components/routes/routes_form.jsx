@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router-dom';
-// import errorsImg from '../../../app/assets/images/errors.png';
 
 // initial map options
 const mapOptions = {
-// San Francisco coordinates
+// Columbus coordinates
   center: {
     lat: 39.9612,
     lng: -82.9988
@@ -25,7 +24,8 @@ const elevationService = new google.maps.ElevationService;
 
 // props:
 // this.props.errors: array of error messages or null
-// this.props.createRoute(route): create route on the back end
+// this.props.createRoute(route): create route on the back end and updtates
+// store
 class RoutesForm extends React.Component {
   constructor(props){
     super(props);
