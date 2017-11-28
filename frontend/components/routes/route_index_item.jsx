@@ -4,12 +4,12 @@ import { Link, withRouter } from 'react-router-dom';
 
 // props:
 // this.props.route: route object with id, title, polyline, distance,
-// and elevation
+//   and elevation
 
 // Google Static Maps API key:
 // AIzaSyDZ1dbiQu3SG8E0ljRYrI_B3VpuLeXIakE
 
-//Google Static Maps request format
+// Google Static Maps request format
 // https://maps.googleapis.com/maps/api/staticmap? + parameters
 
 class RouteIndexItem extends React.Component {

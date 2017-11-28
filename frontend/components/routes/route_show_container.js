@@ -4,7 +4,8 @@ import { requestSingleRoute, deleteRoute } from '../../actions/route_actions';
 import RouteShow from './route_show';
 
 const mapStateToProps = (state, ownProps) => ({
-  route: state.entities.routes[ownProps.match.params.routeId]
+  route: state.entities.routes[ownProps.match.params.routeId],
+  user: state.session.currentUser
 });
 
 const mapDispatchToProps = dispatch => ({

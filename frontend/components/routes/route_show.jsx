@@ -4,7 +4,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 // initial map options
 const mapOptions = {
-// Columbus coordinates
+// San Francisco coordinates
   center: {
     lat: 37.797236,
     lng: -122.413673
@@ -25,21 +25,32 @@ const elevationService = new google.maps.ElevationService;
 // props:
 // this.props.route: single requested route object
 // this.props.requestSingleRoute(routeId): requests single route from
-// the server/store
+//   the server/store
 // this.props.deleteRoute(routeId): remove the selected route from the
-// server/store
+//   server/store
+// this.props.user: current user that is logged in with an ID, username,
+//   and email
 class RouteShow extends React.Component {
   constructor(props){
     super(props);
   }
 
-  componentWillReceiveProps(newProps){
-    if (newProps.match.url !== this.props.match.url) {
+  componentWillReceiveProps(newProps) {
+    // fetchs desired route if the new URL does not match the current URL
+    // or if the passed down route is undefined
+    if (newProps.match.url !== this.props.match.url || this.props.route === undefined) {
       this.props.requestSingleRoute(newProps.match.params.routeId)
       .then(() => this.showMap());
     }
   }
 
+  componentDidMount() {
+    this.props.requestSingleRoute(this.props.match.params.routeId)
+    .then(() => this.showMap());
+  }
+
+  // initializes the Google map, displays the route's path, and centers
+  // the map on the route
   showMap() {
     // get JSX element for map container
     const mapElement = this.refs.map;
@@ -51,37 +62,60 @@ class RouteShow extends React.Component {
     // create polyline object from the decoded path
     const polylineObj = new google.maps.Polyline({
           path: routePath,
+          strokeColor: "#fc4c02"
         });
     // set the boundaries of the Google map to fit the route
     const boundary = new google.maps.LatLngBounds();
-    const routeArr = polylineObj.getPath()
-    // for (var i = 0; i < routeArr.length; i++) {
-    //   boundary.extend(routeArr[i]);
-    // }
-    // this.route_map.fitBounds(bounds);
+    // converts polyline path to MVCArray
+    const routeMVCArr = polylineObj.getPath();
+    // extends the boundary for each lat-lng pair in the MVCArray
+    routeMVCArr.forEach(latLng => boundary.extend(latLng));
+    // fits the map to the boundary
+    this.route_map.fitBounds(boundary);
     // render the route on the map
     polylineObj.setMap(this.route_map);
-    // clears the direction display object from the route map
-    // prevents old routes from being shown upon revisit
-    // directionsDisplay.setMap(null)
   }
 
-  componentDidMount(){
-    this.props.requestSingleRoute(this.props.match.params.routeId)
-    .then(() => this.showMap());
-  }
+  render() {
+    if (this.props.route) {
+      const route = this.props.route;
+      const user = this.props.user;
 
-  render(){
-    return(
-      <div className="routes-show-box">
-        <div className="routes-show-map" ref="map">
-          Map
+      return(
+        <div className="routes-show-box">
+          <div className="routes-show-title">
+            {route.title}
+          </div>
+
+          <div className="routes-show-info-box">
+            <div className="routes-show-map" ref="map">
+              Map
+            </div>
+
+            <div className="routes-show-info">
+
+              <div className="routes-show-username">
+                {`By ${user.username}`}
+              </div>
+              <br/>
+
+              <div className="routes-show-stats">
+                <div className="routes-show-distance">
+                  {`${route.distance} mi`}
+                </div>
+                <div className="routes-show-elevation">
+                  {`${route.elevation} ft`}
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div className="routes-show-title">Sometext</div>
-      </div>
-    );
+      );
+    } else {
+      return null;
+    }
   }
-
 }
 
 export default RouteShow;

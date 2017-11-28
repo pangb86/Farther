@@ -6,7 +6,7 @@ import RouteIndexItem from './route_index_item';
 // props:
 // this.props.routes: array of all the routes for a user
 // this.props.requestRoutes(): retrieve all routes for a user
-// from the server
+//   from the server
 
 class RoutesIndex extends React.Component {
   constructor(props){
