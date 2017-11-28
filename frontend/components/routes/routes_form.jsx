@@ -26,6 +26,7 @@ const elevationService = new google.maps.ElevationService;
 // this.props.errors: array of error messages or null
 // this.props.createRoute(route): create route on the back end and updates
 //   store
+
 class RoutesForm extends React.Component {
   constructor(props){
     super(props);
@@ -189,6 +190,8 @@ class RoutesForm extends React.Component {
     }
   }
 
+  // toggles bicycling layer on the map upon clicking the bicycling
+  // layer button
   toggleBikeLayer() {
     // toggles bicycling layer based on layerOn boolean
     if (this.state.layerOn) {
@@ -200,19 +203,24 @@ class RoutesForm extends React.Component {
     }
   }
 
+  // updates the state of the title based on input
   update(field) {
     return e => this.setState({[field]: e.currentTarget.value});
   }
 
+  // fires on clicking the create route button
   handleSubmit(e) {
     e.preventDefault();
+    // creates routes object for createRoute AJAX call
     const routes = {
       title: this.state.title,
       distance: this.state.distance,
       elevation: this.state.elevation,
       polyline: this.state.polyline
     };
+    // AJAX call for creating the route
     this.props.createRoute({ routes })
+    // redirect to routes index page
     .then(() => this.props.history.push("/routes"));
   }
 

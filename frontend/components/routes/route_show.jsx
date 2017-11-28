@@ -30,6 +30,7 @@ const elevationService = new google.maps.ElevationService;
 //   server/store
 // this.props.user: current user that is logged in with an ID, username,
 //   and email
+
 class RouteShow extends React.Component {
   constructor(props){
     super(props);
@@ -82,33 +83,50 @@ class RouteShow extends React.Component {
       const user = this.props.user;
 
       return(
-        <div className="routes-show-box">
-          <div className="routes-show-title">
-            {route.title}
-          </div>
+        <div className="routes-show-main">
+          <div className="routes-show-box">
 
-          <div className="routes-show-info-box">
-            <div className="routes-show-map" ref="map">
-              Map
+            <div className="routes-show-intro">
+              <div className="routes-show-title">
+                {route.title}
+              </div>
+              <button className="routes-show-delete-button">
+                Delete Route
+              </button>
             </div>
 
-            <div className="routes-show-info">
-
-              <div className="routes-show-username">
-                {`By ${user.username}`}
+            <div className="routes-show-info-box">
+              <div className="routes-show-map" ref="map">
+                Map
               </div>
-              <br/>
+              <div className="routes-show-info">
 
-              <div className="routes-show-stats">
-                <div className="routes-show-distance">
-                  {`${route.distance} mi`}
+                <div className="routes-show-namedate">
+                  <div className="routes-show-username">
+                    {`By ${user.username}`}
+                  </div>
+                  <div className="routes-show-date">
+                    {`Created on ${new Date(route.created_at).toLocaleDateString()}`}
+                  </div>
                 </div>
-                <div className="routes-show-elevation">
-                  {`${route.elevation} ft`}
+
+                <br/>
+                <div className="routes-show-stats">
+                  <div className="route-item-distance-box">
+                    <div className="route-item-distance">
+                      {`${route.distance} mi`}
+                    </div>
+                    <div className="route-item-distance-tag">Distance</div>
+                  </div>
+                  <div className="route-item-elevation-box">
+                    <div className="route-item-elevation">
+                      {`${route.elevation} ft`}
+                    </div>
+                    <div className="route-item-elvation-tag">Elevation</div>
+                  </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       );

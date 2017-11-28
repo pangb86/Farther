@@ -1,8 +1,43 @@
+.routes-show-main {
+  display: block;
+  width: 100%;
+}
+
+.routes-show-box {
+  margin: 0 auto;
+  // border: 1px solid gray;
+  width: 71%;
+}
+
+.routes-show-intro {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 1px;
+}
+
 .routes-show-title {
   font-family: 'Muli', sans-serif;
   font-size: 24px;
   font-weight: 400;
   color: black;
+  margin-right: 0px;
+  margin-top: 39px;
+  margin-bottom: 40px;
+}
+
+.routes-show-delete-button {
+  font-family: 'Muli', sans-serif;
+  font-size: 15px;
+  color: white;
+  background-color: #fc4c02;
+  border-radius: 3px;
+  border: none;
+  width: 200px;
+  height: 43px;
+  margin-left: 50px;
+  cursor: pointer;
 }
 
 .routes-show-info-box {
@@ -12,8 +47,8 @@
 }
 
 .routes-show-map {
-  width: 860px;
-  height: 400px;
+  width: 950px;
+  height: 530px;
 }
 
 .routes-show-info {
@@ -22,6 +57,13 @@
   flex-direction: column;
   align-items: flex-start;
   margin-left: 50px;
+  margin-top: 10px;
+}
+
+.routes-show-namedate {
+  width: 100%;
+  border-bottom: 1px solid #ccccd1;
+  padding-bottom: 10px;
 }
 
 .routes-show-username {
@@ -31,10 +73,21 @@
   color: black;
 }
 
+.routes-show-date {
+  font-family: 'Muli', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #98989C;
+  margin-top: 4px;
+}
+
 .routes-show-stats {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #ccccd1;
+  width: 100%;
 }
 
 .routes-show-distance {
