@@ -15,14 +15,13 @@ class Api::RoutesController < ApplicationController
   end
 
   def create
-    puts route_params
     @user = current_user
     @route = Route.new(route_params)
     @route.user_id = @user.id
     if @route.save
       render :show
     else
-      render json: @route.errors.full_messages, status: 401
+      render json: @route.errors.full_messages, status: 400
     end
   end
 

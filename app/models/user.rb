@@ -22,6 +22,8 @@ class User < ApplicationRecord
 
   has_many :routes
 
+  has_many :workouts
+
   def ensure_session_token
     self.session_token ||= SecureRandom.urlsafe_base64
   end

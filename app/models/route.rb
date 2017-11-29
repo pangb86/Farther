@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  title      :string           not null
-#  polyline   :string           not null
+#  polyline   :text             not null
 #  distance   :float            not null
 #  elevation  :integer          not null
 #  user_id    :integer          not null
@@ -17,7 +17,9 @@ class Route < ApplicationRecord
   validates :title, uniqueness: true
 
   # Change so that one user can't have routes with the same title
-  # but different users can have a route with the same title  
+  # but different users can have a route with the same title
 
   belongs_to :user
+
+  has_many :workouts
 end

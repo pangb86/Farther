@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  title      :string           not null
-#  polyline   :string           not null
+#  polyline   :text             not null
 #  distance   :float            not null
 #  elevation  :integer          not null
 #  user_id    :integer          not null
