@@ -28,7 +28,7 @@ const elevationService = new google.maps.ElevationService;
 //   store
 
 class RoutesForm extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       // array of Google Maps Marker objects
