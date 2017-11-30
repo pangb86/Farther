@@ -88,6 +88,33 @@
   height: 200px;
 }
 
+.workouts-route-dropdown {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.workouts-route-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-left: 40px;
+  margin-top: 12px;
+}
+
+.workouts-route-distance {
+  font-family: 'Muli', sans-serif;
+  font-size: 18px;
+  color: black;
+  margin-right: 40px;
+}
+
+.workouts-route-elevation {
+  font-family: 'Muli', sans-serif;
+  font-size: 18px;
+  color: black;
+}
+
 .workouts-duration-tag{
   font-family: 'Muli', sans-serif;
   font-size: 13px;

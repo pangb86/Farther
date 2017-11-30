@@ -35,7 +35,11 @@ class WorkoutsForm extends React.Component {
       // duratin seconds value
       seconds: undefined,
       // id of the the selected route
-      route_id: undefined
+      route_id: undefined,
+      // route distance string
+      routeDistance: "",
+      // route elevation string
+      routeElevation: ""
     };
     this.updateMap = this.updateMap.bind(this);
   }
@@ -80,6 +84,9 @@ class WorkoutsForm extends React.Component {
           break;
         }
       }
+      // sets the route distance and elevation for display
+      this.setState({routeDistance: `${currentRoute.distance} mi`});
+      this.setState({routeElevation: `${currentRoute.elevation} ft`})
       // clear previously rendered route from the map
       if (this.polylineObj) {
         this.polylineObj.setMap(null);
@@ -137,6 +144,7 @@ class WorkoutsForm extends React.Component {
             </textarea>
 
             <div className="workouts-route-dropdown">
+
               <select
                 className="workouts-route-select"
                 defaultValue="default"
@@ -149,6 +157,16 @@ class WorkoutsForm extends React.Component {
                   ))
                 }
               </select>
+
+              <div className="workouts-route-info">
+                <div className="workouts-route-distance">
+                  {this.state.routeDistance}
+                </div>
+                <div className="workouts-route-elevation">
+                  {this.state.routeElevation}
+                </div>
+              </div>
+
             </div>
 
             <div className="workouts-duration-tag">
@@ -179,7 +197,6 @@ class WorkoutsForm extends React.Component {
                 Seconds
               </div>
             </div>
-
 
           </div>
 

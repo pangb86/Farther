@@ -34,7 +34,6 @@
   font-family: 'Muli', sans-serif;
   font-size: 18px;
   vertical-align: middle;
-  border: 1px solid #666;
   color: black;
   min-height: 25px;
   background: white;
@@ -42,6 +41,13 @@
   height: 40px;
   padding-left: 8px;
   margin: 0px 0px 0px 80px;
+  border: 1px solid #666;
+  -webkit-transition: border 0.5s;
+  transition: border 0.5s;
+}
+
+.route-title-input:focus {
+  border: 2px solid  #fc4c02;
 }
 
 .routes-help-icon {
