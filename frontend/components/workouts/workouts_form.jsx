@@ -29,19 +29,24 @@ class WorkoutsForm extends React.Component {
       // workout description
       description: "",
       // duration hours value
-      hours: undefined,
+      hours: "",
       // duration minutes value
-      minutes: undefined,
+      minutes: "",
       // duratin seconds value
-      seconds: undefined,
+      seconds: "",
       // id of the the selected route
-      route_id: undefined,
+      route_id: 0,
       // route distance string
       routeDistance: "",
       // route elevation string
-      routeElevation: ""
+      routeElevation: "",
+      // boolean indicating if create button is disabled
+      createDisabled: true,
+      // boolean indicating visibility of the errors icon
+      showErrors: false,
     };
     this.updateMap = this.updateMap.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -67,6 +72,13 @@ class WorkoutsForm extends React.Component {
     }
   }
 
+  // sets visibility of the errors icon
+  componentWillReceiveProps(newProps) {
+    if (newProps.errors.length > 0) {
+      this.setState({showErrors: true});
+    }
+  }
+
   // updates the state of the input field based on change
   update(field) {
     return e => {
@@ -74,25 +86,28 @@ class WorkoutsForm extends React.Component {
     };
   }
 
+  // sets the route ID of the workout and displays the route on the map
   updateMap(e) {
     e.preventDefault();
     this.setState({route_id: e.currentTarget.value}, () => {
       const routesArr = this.props.routes;
       for (var i = 0; i < routesArr.length; i++) {
         if (routesArr[i].id == this.state.route_id) {
-          var currentRoute = routesArr[i];
+          this.currentRoute = routesArr[i];
           break;
         }
       }
+      // enable the create button
+      this.setState({createDisabled: false})
       // sets the route distance and elevation for display
-      this.setState({routeDistance: `${currentRoute.distance} mi`});
-      this.setState({routeElevation: `${currentRoute.elevation} ft`})
+      this.setState({routeDistance: `${this.currentRoute.distance} mi`});
+      this.setState({routeElevation: `${this.currentRoute.elevation} ft`});
       // clear previously rendered route from the map
       if (this.polylineObj) {
         this.polylineObj.setMap(null);
       }
       // create a route path from the route's polyline string
-      const routePath = google.maps.geometry.encoding.decodePath(currentRoute.polyline);
+      const routePath = google.maps.geometry.encoding.decodePath(this.currentRoute.polyline);
       // create polyline object from the decoded path
       this.polylineObj = new google.maps.Polyline({
             path: routePath,
@@ -111,6 +126,53 @@ class WorkoutsForm extends React.Component {
     });
   }
 
+  // fires on clicking the create workout button
+  handleSubmit(e) {
+    e.preventDefault();
+    // calculate duration in seconds
+    if (this.state.seconds === "") {
+      var seconds = 0;
+    } else {
+      var seconds = this.state.seconds
+    }
+    const duration = (this.state.hours * 3600) + (this.state.minutes * 60) + seconds;
+    // calcualte speed in miles per hour
+    const speed = (this.currentRoute.distance / duration) * 3600;
+    // creates workouts object for createWorkout AJAX call
+    // console.log(duration);
+    // console.log(speed);
+    const workouts = {
+      title: this.state.title,
+      description: this.state.description,
+      duration: duration,
+      speed: speed,
+      route_id: this.state.route_id
+    };
+    if (duration === 0) {
+      return null;
+    } else {
+    // AJAX call for creating the workout
+      this.props.createWorkout({ workouts })
+    }
+    // redirect to routes index page
+    // .then(() => this.props.history.push("/routes"));
+  }
+
+  // display route errors
+  renderErrors() {
+    if (this.props.errors.length > 0) {
+      return(
+        <ul className="workouts-errors">
+          {this.props.errors.map((error, i) => (
+            <li key={`error-${i}`}>
+              {error}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+  }
+
   render() {
     const routes = this.props.routes;
 
@@ -121,9 +183,24 @@ class WorkoutsForm extends React.Component {
           <div className="workouts-form-header">
             New Workout
           </div>
-          <button className="workouts-form-create-button">
+          <button className="workouts-form-create-button"
+            onClick={this.handleSubmit}
+            disabled={this.state.createDisabled}
+          >
             Create Workout
           </button>
+
+          <div className="routes-errors-icon"
+            style={{visibility: this.state.showErrors ? 'visible' : 'hidden' }}
+          >
+            <img src="https://i.imgur.com/cd4XFYD.png"
+              className="routes-errors-image"
+            />
+            <div className="routes-errors-box">
+              {this.renderErrors()}
+            </div>
+          </div>
+
         </div>
 
         <div className="workouts-input-map">
@@ -134,12 +211,14 @@ class WorkoutsForm extends React.Component {
               onChange={this.update('title')}
               className="workout-title-input"
               placeholder="Title"
+              required={true}
             />
 
             <textarea className ="workouts-description-input"
               value={this.state.description}
               onChange={this.update('description')}
               placeholder="Description"
+              required={true}
             >
             </textarea>
 
@@ -149,6 +228,7 @@ class WorkoutsForm extends React.Component {
                 className="workouts-route-select"
                 defaultValue="default"
                 onChange={this.updateMap}
+                required={true}
               >
                 <option value='default' disabled>Select a route</option>
                 {
@@ -176,7 +256,9 @@ class WorkoutsForm extends React.Component {
               <div className="workouts-hours-box">
                 <input className="workouts-hours-input"
                   value={this.state.hours}
-                  onChange={this.update('hours')} />
+                  onChange={this.update('hours')}
+                  required={true}
+                />
                 <br/>
                 Hours
               </div>
@@ -184,6 +266,7 @@ class WorkoutsForm extends React.Component {
                 <input className="workouts-minutes-input"
                   value={this.state.minutes}
                   onChange={this.update('minutes')}
+                  required={true}
                 />
                 <br/>
                 Minutes
@@ -192,6 +275,7 @@ class WorkoutsForm extends React.Component {
                 <input className="workouts-seconds-input"
                   value={this.state.seconds}
                   onChange={this.update('seconds')}
+                  required={true}
                 />
                 <br/>
                 Seconds
