@@ -1,0 +1,114 @@
+.workouts-index-box {
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.workouts-index-intro {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.workouts-index-header {
+  font-family: 'Muli', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: black;
+  margin: 38px 50px 10px 30px;
+}
+
+.workouts-index-create-button {
+  font-family: 'Muli', sans-serif;
+  font-size: 15px;
+  color: white;
+  background-color: #fc4c02;
+  border-radius: 3px;
+  border: none;
+  width: 200px;
+  height: 43px;
+  cursor: pointer;
+  margin-top: 28px;;
+}
+
+.workouts-index-list-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.workout-item-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #F7F7F7;
+  margin-bottom: 20px;
+  width: 900px;
+}
+
+.workout-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-left: 25px;
+  padding-top: 10px;
+}
+
+.workout-item-date {
+  font-family: 'Muli', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #98989C;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.workout-item-title {
+  font-family: 'Muli', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.workout-item-title-link {
+  font-family: 'Muli', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: black;
+  margin-bottom: 20px;
+  text-decoration: none;
+}
+
+.workout-item-title-link:hover {
+  color: #5D7EB1;
+  text-decoration: underline;
+}
+
+
+.workout-item-distance {
+  font-family: 'Muli', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+  margin-bottom: 10px
+}
+
+.workout-item-elevation {
+  font-family: 'Muli', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+  margin-bottom: 10px;
+}
+
+.workout-item-speed {
+  font-family: 'Muli', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+  margin-bottom: 10px;
+}

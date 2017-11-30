@@ -15,6 +15,7 @@ import RoutesFormContainer from './routes/routes_form_container';
 import RoutesIndexContainer from './routes/routes_index_container';
 import RoutesShowContainer from './routes/route_show_container';
 import WorkoutsFormContainer from './workouts/workouts_form_container';
+import WorkoutsIndexContainer from './workouts/workouts_index_container';
 
 const App = () => (
   <div className="outer-main-div">
@@ -23,7 +24,8 @@ const App = () => (
       <AuthRoute path="/splash" component={Splash} />
       <AuthRoute path="/login" component={SessionFormContainer} />
       <AuthRoute path="/signup" component={SessionFormContainer} />
-      <ProtectedRoute path="/workouts" component={WorkoutsFormContainer} />
+      <ProtectedRoute path="/workouts/new" component={WorkoutsFormContainer} />
+      <ProtectedRoute path="/workouts" component={WorkoutsIndexContainer} />
       <ProtectedRoute path="/routes/new" component={RoutesFormContainer} />
       <ProtectedRoute exact path="/routes/:routeId" component={RoutesShowContainer} />
       <ProtectedRoute path="/routes" component={RoutesIndexContainer} />

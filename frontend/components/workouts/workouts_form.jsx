@@ -44,6 +44,8 @@ class WorkoutsForm extends React.Component {
       createDisabled: true,
       // boolean indicating visibility of the errors icon
       showErrors: false,
+      // boolean indicating visibility of the duration errors icon
+      showDurationError: false
     };
     this.updateMap = this.updateMap.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -148,14 +150,17 @@ class WorkoutsForm extends React.Component {
       speed: speed,
       route_id: this.state.route_id
     };
+    // show duration error if invalid duration was entered
     if (duration === 0) {
-      return null;
+      this.setState({showDurationError: true});
     } else {
+      this.setState({showDurationError: false});
     // AJAX call for creating the workout
       this.props.createWorkout({ workouts })
+      .then(() => this.props.history.push("/workouts"));
     }
     // redirect to routes index page
-    // .then(() => this.props.history.push("/routes"));
+    //
   }
 
   // display route errors
@@ -178,7 +183,6 @@ class WorkoutsForm extends React.Component {
 
     return(
       <div className="workouts-form-main">
-
         <div className="workouts-form-intro">
           <div className="workouts-form-header">
             New Workout
@@ -189,7 +193,6 @@ class WorkoutsForm extends React.Component {
           >
             Create Workout
           </button>
-
           <div className="routes-errors-icon"
             style={{visibility: this.state.showErrors ? 'visible' : 'hidden' }}
           >
@@ -200,35 +203,26 @@ class WorkoutsForm extends React.Component {
               {this.renderErrors()}
             </div>
           </div>
-
         </div>
-
         <div className="workouts-input-map">
-
           <div className="workouts-input-main">
             <input type="text"
               value={this.state.title}
               onChange={this.update('title')}
               className="workout-title-input"
               placeholder="Title"
-              required={true}
             />
-
             <textarea className ="workouts-description-input"
               value={this.state.description}
               onChange={this.update('description')}
               placeholder="Description"
-              required={true}
             >
             </textarea>
-
             <div className="workouts-route-dropdown">
-
               <select
                 className="workouts-route-select"
                 defaultValue="default"
                 onChange={this.updateMap}
-                required={true}
               >
                 <option value='default' disabled>Select a route</option>
                 {
@@ -237,7 +231,6 @@ class WorkoutsForm extends React.Component {
                   ))
                 }
               </select>
-
               <div className="workouts-route-info">
                 <div className="workouts-route-distance">
                   {this.state.routeDistance}
@@ -246,9 +239,7 @@ class WorkoutsForm extends React.Component {
                   {this.state.routeElevation}
                 </div>
               </div>
-
             </div>
-
             <div className="workouts-duration-tag">
               Duration
             </div>
@@ -257,7 +248,7 @@ class WorkoutsForm extends React.Component {
                 <input className="workouts-hours-input"
                   value={this.state.hours}
                   onChange={this.update('hours')}
-                  required={true}
+                  type="number"
                 />
                 <br/>
                 Hours
@@ -266,7 +257,7 @@ class WorkoutsForm extends React.Component {
                 <input className="workouts-minutes-input"
                   value={this.state.minutes}
                   onChange={this.update('minutes')}
-                  required={true}
+                  type="number"
                 />
                 <br/>
                 Minutes
@@ -275,21 +266,29 @@ class WorkoutsForm extends React.Component {
                 <input className="workouts-seconds-input"
                   value={this.state.seconds}
                   onChange={this.update('seconds')}
-                  required={true}
+                  type="number"
                 />
                 <br/>
                 Seconds
               </div>
+              <div className="routes-errors-icon"
+                style={{visibility: this.state.showDurationError ? 'visible' : 'hidden' }}
+              >
+                <img src="https://i.imgur.com/cd4XFYD.png"
+                  className="routes-errors-image"
+                />
+                <div className="routes-errors-box">
+                  <ul className="workouts-errors">
+                    <li>Please enter a duration</li>
+                  </ul>
+                </div>
+              </div>
             </div>
-
           </div>
-
           <div className="workouts-form-map" ref="map">
             Map
           </div>
-
         </div>
-
       </div>
     );
   }
