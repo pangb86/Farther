@@ -33,6 +33,33 @@
   margin-top: 28px;;
 }
 
+.workouts-stats-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background: #F7F7F7;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  width: 900px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.workouts-index-number {
+  font-family: 'Muli', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
+  text-align: center;
+}
+
+.workouts-stat-workouts-tag {
+  font-family: 'Muli', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #98989C;
+}
+
 .workouts-index-list-box {
   display: flex;
   flex-direction: column;
@@ -94,7 +121,7 @@
   font-size: 18px;
   font-weight: 400;
   color: black;
-  margin-bottom: 10px
+  margin-bottom: 12px
 }
 
 .workout-item-elevation {
@@ -102,7 +129,7 @@
   font-size: 18px;
   font-weight: 400;
   color: black;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .workout-item-speed {
@@ -110,5 +137,5 @@
   font-size: 18px;
   font-weight: 400;
   color: black;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
