@@ -12,6 +12,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = dispatch => ({
   requestSingleRoute: routeId => dispatch(requestSingleRoute(routeId)),
+  deleteRoute: routeId => dispatch(deleteRoute(routeId)),
   requestWorkouts: () => dispatch(requestWorkouts())
 });
 
