@@ -66,7 +66,7 @@
 .workouts-index-list{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -76,7 +76,7 @@
   flex-direction: row;
   justify-content: space-between;
   background: #F7F7F7;
-  margin-bottom: 20px;
+  margin: 20px;
   width: 620px;
   height: 270px
 }

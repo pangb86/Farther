@@ -3,6 +3,7 @@ import {
   RECEIVE_ONE_WORKOUT,
   REMOVE_WORKOUT
 } from '../actions/workout_actions';
+import { REMOVE_ROUTE } from '../actions/route_actions';
 import merge from 'lodash/merge';
 
 const workoutsReducer = (oldState = {}, action) => {

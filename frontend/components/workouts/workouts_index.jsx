@@ -17,8 +17,15 @@ class WorkoutsIndex extends React.Component {
     this.props.requestWorkouts();
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.match.url !== this.props.match.url) {
+      this.props.requestWorkouts();
+    }
+  }
+
   render() {
-    if (this.props.workouts[0]) {
+    console.log(this.props);
+    if (this.props.workouts.length > 0) {
       const routesArr = this.props.routes;
       const workoutsArr = this.props.workouts;
       // declare variables for workouts stats

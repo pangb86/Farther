@@ -21,12 +21,29 @@ class UserProfile extends React.Component {
     this.props.requestWorkouts();
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.match.url !== this.props.match.url) {
+      this.props.requestRoutes();
+      this.props.requestWorkouts();
+    }
+  }
+
   render() {
     if (this.props.routes) {
       // get the last 4 routes made
-      const routesArr = this.props.routes.slice(Math.max(this.props.routes.length - 4, 1));
+      let routesArr = [];
+      let workoutsArr = [];
+      if (this.props.routes.length > 4) {
+        routesArr = this.props.routes.slice(Math.max(this.props.routes.length - 4, 1));
+      } else {
+        routesArr = this.props.routes;
+      }
       // gets the last 4 workouts
-      const workoutsArr = this.props.workouts.slice(Math.max(this.props.workouts.length - 4, 1));
+      if (this.props.workouts.length > 4) {
+        workoutsArr = this.props.workouts.slice(Math.max(this.props.workouts.length - 4, 1));
+      } else {
+        workoutsArr = this.props.workouts;
+      }
       // array of the all the user's workouts
       const allWorkoutsArr = this.props.workouts;
       const allRoutesArr = this.props.routes;

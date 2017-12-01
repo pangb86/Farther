@@ -14,16 +14,21 @@ const mapOptions = {
 
 // props:
 // this.props.route: single requested route object
+// this.props.workouts: array of all the user's workouts
 // this.props.requestSingleRoute(routeId): requests single route from
 //   the server/store
 // this.props.deleteRoute(routeId): remove the selected route from the
 //   server/store
+// this.props.requestWorkouts()
 // this.props.user: current user that is logged in with an ID, username,
 //   and email
 
 class RouteShow extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showErrors: false
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -31,12 +36,14 @@ class RouteShow extends React.Component {
     // fetchs desired route if the new URL does not match the current URL
     // or if the passed down route is undefined
     if (newProps.match.url !== this.props.match.url || this.props.route === undefined) {
+      this.props.requestWorkouts();
       this.props.requestSingleRoute(newProps.match.params.routeId)
       .then(() => this.showMap());
     }
   }
 
   componentDidMount() {
+    this.props.requestWorkouts();
     this.props.requestSingleRoute(this.props.match.params.routeId)
     .then(() => this.showMap());
   }
@@ -71,10 +78,24 @@ class RouteShow extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const routeId = this.props.route.id;
-    // calls deleteRoute on the current route
-    this.props.deleteRoute(routeId)
-    // redirect to routes index page
-    .then(() => this.props.history.push("/routes"));
+
+    const workoutsArr = this.props.workouts;
+    let deleteAllowed = true;
+
+    for (var i = 0; i < workoutsArr.length; i++) {
+      if (workoutsArr[i].route_id == routeId) {
+        deleteAllowed = false;
+        break;
+      }
+    }
+    if (deleteAllowed === true) {
+      // calls deleteRoute on the current route
+      this.props.deleteRoute(routeId)
+      // redirect to routes index page
+      .then(() => this.props.history.push("/routes"));
+    } else {
+      this.setState({showErrors: true})
+    }
   }
 
   render() {
@@ -94,6 +115,18 @@ class RouteShow extends React.Component {
               >
                 Delete Route
               </button>
+              <div className="routes-errors-icon"
+                style={{visibility: this.state.showErrors ? 'visible' : 'hidden' }}
+              >
+                <img src="https://i.imgur.com/cd4XFYD.png"
+                  className="routes-errors-image"
+                />
+                <div className="routes-errors-box">
+                  <ul className="workouts-errors">
+                    <li>Cannot delete route associated with workouts</li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <div className="routes-show-info-box">
               <div className="routes-show-map" ref="map">
