@@ -104,7 +104,7 @@ class WorkoutsIndex extends React.Component {
               {
                 workoutsArr.map(workout => (
                   <WorkoutIndexItem
-                    key={workout.id}
+                    key={`index-${workout.id}`}
                     workout={workout}
                     route={routesArr.find((route) => route.id === workout.route_id)}
                   />

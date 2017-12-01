@@ -47,7 +47,9 @@ const userGreeting = (currentUser, logout) => (
       </Link>
     </div>
     <div className="nav-buttons">
-      <h2 className="nav-username">{currentUser.username}</h2>
+      <Link to="/" className="nav-user-link">
+        <h2 className="nav-username">{currentUser.username}</h2>
+      </Link>
       <button className="nav-logout-button" onClick={logout}>
         <span className="nav-logout-icon"></span>
         <div>

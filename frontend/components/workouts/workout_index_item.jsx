@@ -18,11 +18,11 @@ class WorkoutIndexItem extends React.Component {
     let mapPic = "https://maps.googleapis.com/maps/api/staticmap?style=feature:administrative%7Cvisibility:off&style=feature:road%7Cvisibility:simplified&style=feature:road.highway.controlled_access%7Cvisibility:off&scale=2&size=300x180&path=weight:2%7Ccolor:0xfc4c02%7Cenc:";
     // attach route's polyline and API key to the HTML request
     mapPic += route.polyline + "&key=AIzaSyDZ1dbiQu3SG8E0ljRYrI_B3VpuLeXIakE";
-
+    // calculate the ride duration in hours, minutes, and seconds
     let hours = Math.floor(workout.duration / 3600);
     let minutes = Math.floor((workout.duration % 3600) / 60);
     let seconds = workout.duration - hours * 3600 - minutes * 60;
-
+    // convert the duration into a string
     let hoursString = "";
     let minutesString = "";
     let secondsString = "";
