@@ -142,8 +142,6 @@ class WorkoutsForm extends React.Component {
     let speed = (this.currentRoute.distance / duration) * 3600;
     speed = Math.round(speed * 10) / 10;
     // creates workouts object for createWorkout AJAX call
-    // console.log(duration);
-    // console.log(speed);
     const workouts = {
       title: this.state.title,
       description: this.state.description,
@@ -157,11 +155,10 @@ class WorkoutsForm extends React.Component {
     } else {
       this.setState({showDurationError: false});
     // AJAX call for creating the workout
+    // redirect to routes index page
       this.props.createWorkout({ workouts })
       .then(() => this.props.history.push("/workouts"));
     }
-    // redirect to routes index page
-    //
   }
 
   // display route errors
