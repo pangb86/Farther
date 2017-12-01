@@ -1,0 +1,25 @@
+.user-routes-main {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.user-routes-intro {
+  font-family: 'Muli', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: black;
+  margin-bottom: 15px;
+}
+
+.user-routes-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 1000px;
+}
+
+.user-routes-list-box {
+  width: 1000px;
+  border: 1px solid black;
+  margin: 0 auto;
+}

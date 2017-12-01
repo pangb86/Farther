@@ -23,6 +23,7 @@ const mapOptions = {
 class WorkoutShow extends React.Component {
   constructor(props) {
     super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -67,6 +68,15 @@ class WorkoutShow extends React.Component {
     this.route_map.fitBounds(boundary);
     // render the route on the map
     polylineObj.setMap(this.route_map);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const workoutId = this.props.workout.id;
+    // calls deleteRoute on the current route
+    this.props.deleteWorkout(workoutId)
+    // redirect to routes index page
+    .then(() => this.props.history.push("/workouts"));
   }
 
   render() {
@@ -145,6 +155,12 @@ class WorkoutShow extends React.Component {
                 </div>
               </div>
             </div>
+
+            <button className="workouts-show-delete-button"
+              onClick={this.handleSubmit}
+            >
+              Delete Workout
+            </button>
 
           </div>
 

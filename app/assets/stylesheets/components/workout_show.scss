@@ -44,6 +44,7 @@
   font-size: 24px;
   font-weight: 600;
   color: black;
+  width: 300px;
 }
 
 .workouts-show-title:hover {
@@ -56,15 +57,29 @@
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  margin-left: 250px;
   margin-top: 7px;
 }
 
 .workout-show-stats > div {
-  padding: 15px;
+  font-size: 20px;
+  width: 150px;
+}
+
+.workouts-show-delete-button {
+  font-family: 'Muli', sans-serif;
+  font-size: 15px;
+  color: white;
+  background-color: #fc4c02;
+  border-radius: 3px;
+  border: none;
+  width: 200px;
+  height: 43px;
+  margin-left: 100px;
+  margin-top: 23px;
+  cursor: pointer;
 }
 
 .workouts-show-map {
   width: 100%;
-  height: 600px;
+  height: 550px;
 }

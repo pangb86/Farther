@@ -19,6 +19,24 @@ class WorkoutIndexItem extends React.Component {
     // attach route's polyline and API key to the HTML request
     mapPic += route.polyline + "&key=AIzaSyDZ1dbiQu3SG8E0ljRYrI_B3VpuLeXIakE";
 
+    let hours = Math.floor(workout.duration / 3600);
+    let minutes = Math.floor((workout.duration % 3600) / 60);
+    let seconds = workout.duration - hours * 3600 - minutes * 60;
+
+    let hoursString = "";
+    let minutesString = "";
+    let secondsString = "";
+    if (hours !== 0) {
+      hoursString = `${hours} hr`;
+    }
+    if (minutes !== 0) {
+      minutesString = `${minutes} min`;
+    }
+    if (seconds !== 0) {
+      secondsString = `${seconds} sec`;
+    }
+    let timeString = hoursString + " " + minutesString + " " + secondsString;
+
     return (
       <div className="workout-item-box">
         <div className="workout-item-info">
@@ -33,6 +51,7 @@ class WorkoutIndexItem extends React.Component {
           <div className="workout-item-distance">{`${route.distance} mi`}</div>
           <div className="workout-item-elevation">{`${route.elevation} ft`}</div>
           <div className="workout-item-speed">{`${workout.speed} mph`}</div>
+          <div className="workout-item-duration">{timeString}</div>
         </div>
         <div className="workout-item-map">
           <Link to={`/workouts/${workout.id}`} >

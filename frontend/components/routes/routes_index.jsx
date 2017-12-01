@@ -33,7 +33,7 @@ class RoutesIndex extends React.Component {
           <ul className="routes-index-list">
             {
               routesArr.map(route => (
-                <RouteIndexItem key={route.id} route={route} />
+                <RouteIndexItem key={`index-${route.id}`} route={route} />
               ))
             }
           </ul>
