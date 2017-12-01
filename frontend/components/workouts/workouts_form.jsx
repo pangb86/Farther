@@ -137,9 +137,10 @@ class WorkoutsForm extends React.Component {
     } else {
       var seconds = this.state.seconds
     }
-    const duration = (this.state.hours * 3600) + (this.state.minutes * 60) + seconds;
+    const duration = Math.abs(this.state.hours * 3600) + Math.abs(this.state.minutes * 60) + Math.abs(seconds);
     // calcualte speed in miles per hour
-    const speed = (this.currentRoute.distance / duration) * 3600;
+    let speed = (this.currentRoute.distance / duration) * 3600;
+    speed = Math.round(speed * 10) / 10;
     // creates workouts object for createWorkout AJAX call
     // console.log(duration);
     // console.log(speed);

@@ -32,7 +32,7 @@ const elevationService = new google.maps.ElevationService;
 //   and email
 
 class RouteShow extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -95,7 +95,6 @@ class RouteShow extends React.Component {
       return(
         <div className="routes-show-main">
           <div className="routes-show-box">
-
             <div className="routes-show-intro">
               <div className="routes-show-title">
                 {route.title}
@@ -106,13 +105,11 @@ class RouteShow extends React.Component {
                 Delete Route
               </button>
             </div>
-
             <div className="routes-show-info-box">
               <div className="routes-show-map" ref="map">
                 Map
               </div>
               <div className="routes-show-info">
-
                 <div className="routes-show-namedate">
                   <div className="routes-show-username">
                     {`By ${user.username}`}
@@ -121,7 +118,6 @@ class RouteShow extends React.Component {
                     {`Created on ${new Date(route.created_at).toLocaleDateString()}`}
                   </div>
                 </div>
-
                 <br/>
                 <div className="routes-show-stats">
                   <div className="route-item-distance-box">

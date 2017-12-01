@@ -21,7 +21,6 @@ class WorkoutIndexItem extends React.Component {
 
     return (
       <div className="workout-item-box">
-
         <div className="workout-item-info">
           <div className="workout-item-date-box">
             <div className="workout-item-date">
@@ -35,13 +34,11 @@ class WorkoutIndexItem extends React.Component {
           <div className="workout-item-elevation">{`${route.elevation} ft`}</div>
           <div className="workout-item-speed">{`${workout.speed} mph`}</div>
         </div>
-
         <div className="workout-item-map">
           <Link to={`/workouts/${workout.id}`} >
             <img src={mapPic} className="workout-item-image" />
           </Link>
         </div>
-
       </div>
     );
   }

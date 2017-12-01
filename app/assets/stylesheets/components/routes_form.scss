@@ -44,6 +44,7 @@
   border: 1px solid #666;
   -webkit-transition: border 0.5s;
   transition: border 0.5s;
+  box-sizing: border-box;
 }
 
 .route-title-input:focus {

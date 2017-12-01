@@ -58,7 +58,6 @@ class WorkoutsIndex extends React.Component {
 
       return(
         <div className="workouts-index-box">
-
           <div className="workouts-index-intro">
             <h1 className="workouts-index-header">My Workouts</h1>
             <Link className="routes-create-link" to="/workouts/new">
@@ -100,7 +99,6 @@ class WorkoutsIndex extends React.Component {
               </div>
             </div>
           </div>
-
           <div className="workouts-index-list-box">
             <ul className="workouts-index-list">
               {
@@ -114,7 +112,6 @@ class WorkoutsIndex extends React.Component {
               }
             </ul>
           </div>
-
         </div>
       );
     } else {
