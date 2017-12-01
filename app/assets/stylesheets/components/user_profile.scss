@@ -30,7 +30,10 @@
 }
 
 .user-workouts-list-box {
-
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .user-routes-main {
