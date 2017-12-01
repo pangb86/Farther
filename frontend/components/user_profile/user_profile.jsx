@@ -74,7 +74,6 @@ class UserProfile extends React.Component {
 
       return(
         <div className="user-profile-main">
-
           <div className="user-stats-box">
             <div className="workouts-index-number">
               {allWorkoutsArr.length}
@@ -108,7 +107,6 @@ class UserProfile extends React.Component {
               </div>
             </div>
           </div>
-
           <div className="user-workouts-main">
             <div className="user-workouts-intro">
               Recent Workouts
@@ -127,7 +125,6 @@ class UserProfile extends React.Component {
               </ul>
             </div>
           </div>
-
           <div className="user-routes-main">
             <div className="user-routes-intro">
               Recent Routes
@@ -142,7 +139,6 @@ class UserProfile extends React.Component {
               </ul>
             </div>
           </div>
-
         </div>
       );
     } else {

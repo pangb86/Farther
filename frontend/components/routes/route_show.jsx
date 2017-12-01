@@ -11,16 +11,6 @@ const mapOptions = {
   },
   zoom: 12
 };
-// create a Google Maps bicycling layer
-const bikeLayer = new google.maps.BicyclingLayer();
-// create a Google Maps directions service object
-const directionsService = new google.maps.DirectionsService();
-// create a Google Maps directions rendering object
-const directionsDisplay = new google.maps.DirectionsRenderer({
-    suppressBicyclingLayer: true
-  });
-// create a Google Maps elevation service object
-const elevationService = new google.maps.ElevationService;
 
 // props:
 // this.props.route: single requested route object

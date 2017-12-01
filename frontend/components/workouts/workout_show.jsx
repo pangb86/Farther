@@ -106,13 +106,10 @@ class WorkoutShow extends React.Component {
 
       return(
         <div className="workouts-show-main">
-
           <div className="workouts-show-intro">
             <div className="workouts-show-username">{`${this.props.user.username} - Workout`}</div>
           </div>
-
           <div className="workouts-show-info">
-
             <div className="workouts-show-date-title">
               <div className="workouts-show-date">
                 {`${new Date(workout.created_at).toLocaleDateString()}`}
@@ -121,7 +118,6 @@ class WorkoutShow extends React.Component {
                 {workout.title}
               </div>
             </div>
-
             <div className="workout-show-stats">
               <div className="workouts-index-number">
                 {`${route.distance} mi`}
@@ -130,7 +126,6 @@ class WorkoutShow extends React.Component {
                   Distance
                 </div>
               </div>
-
               <div className="workouts-index-number">
                 {`${route.elevation} ft`}
                 <br/>
@@ -138,7 +133,6 @@ class WorkoutShow extends React.Component {
                   Elevation
                 </div>
               </div>
-
               <div className="workouts-index-number">
                 {`${workout.speed} mph`}
                 <br/>
@@ -146,7 +140,6 @@ class WorkoutShow extends React.Component {
                   Speed
                 </div>
               </div>
-
               <div className="workouts-index-number">
                 {timeString}
                 <br/>
@@ -155,19 +148,15 @@ class WorkoutShow extends React.Component {
                 </div>
               </div>
             </div>
-
             <button className="workouts-show-delete-button"
               onClick={this.handleSubmit}
             >
               Delete Workout
             </button>
-
           </div>
-
           <div className="workouts-show-map" ref="map">
             Map
           </div>
-
         </div>
       );
     } else {
