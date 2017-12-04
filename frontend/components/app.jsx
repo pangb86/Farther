@@ -18,6 +18,7 @@ import WorkoutsFormContainer from './workouts/workouts_form_container';
 import WorkoutsIndexContainer from './workouts/workouts_index_container';
 import WorkoutShowContainer from './workouts/workout_show_container';
 import UserProfileContainer from './user_profile/user_profile_container';
+import Footer from './footer/footer';
 
 const App = () => (
   <div className="outer-main-div">
@@ -34,6 +35,7 @@ const App = () => (
       <ProtectedRoute path="/routes" component={RoutesIndexContainer} />
       <ProtectedRoute path="/" component={UserProfileContainer} />
     </Switch>
+    <Footer />
   </div>
 );
 
