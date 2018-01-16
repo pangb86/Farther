@@ -17,14 +17,14 @@ class UserProfile extends React.Component {
   }
 
   componentDidMount() {
-    this.props.requestRoutes();
-    this.props.requestWorkouts();
+    this.props.requestRoutes()
+    .then(() => this.props.requestWorkouts());
   }
 
   componentWillReceiveProps(newProps) {
     if (newProps.match.url !== this.props.match.url) {
-      this.props.requestRoutes();
-      this.props.requestWorkouts();
+      this.props.requestRoutes()
+      .then(() => this.props.requestWorkouts());
     }
   }
 
@@ -34,13 +34,13 @@ class UserProfile extends React.Component {
       let routesArr = [];
       let workoutsArr = [];
       if (this.props.routes.length > 4) {
-        routesArr = this.props.routes.slice(Math.max(this.props.routes.length - 4, 1));
+        routesArr = this.props.routes.slice(-4);
       } else {
         routesArr = this.props.routes;
       }
       // gets the last 4 workouts
       if (this.props.workouts.length > 4) {
-        workoutsArr = this.props.workouts.slice(Math.max(this.props.workouts.length - 4, 1));
+        workoutsArr = this.props.workouts.slice(-4);
       } else {
         workoutsArr = this.props.workouts;
       }
@@ -133,9 +133,9 @@ class UserProfile extends React.Component {
                 {
                   workoutsArr.map(workout => (
                     <WorkoutIndexItem
-                      key={`user-${workout.id}`}
+                      key={`route-${workout.id}`}
                       workout={workout}
-                      route={routesArr.find((route) => route.id === workout.route_id)}
+                      route={this.props.routes.find((route) => route.id === workout.route_id)}
                     />
                   ))
                 }
@@ -150,7 +150,7 @@ class UserProfile extends React.Component {
               <ul className="user-routes-list">
                 {
                   routesArr.map(route => (
-                    <RouteIndexItem key={`user-${route.id}`} route={route} />
+                    <RouteIndexItem key={`workout-${route.id}`} route={route} />
                   ))
                 }
               </ul>
